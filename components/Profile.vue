@@ -14,39 +14,41 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import * as THREE from 'three'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 const container = ref(null)
 const isLoading = ref(true)
-let scene, camera, renderer, model, controls, mixer
+let scene, camera, renderer, mesh, controls
 let animationFrameId
 
 const init = () => {
+  // Scene setup
   scene = new THREE.Scene()
   
+  // Camera setup
   camera = new THREE.PerspectiveCamera(
     45,
     container.value.clientWidth / container.value.clientHeight,
     0.1,
     1000
   )
-  camera.position.set(0, 1.5, 4)
+  camera.position.set(0, 0, 4)
   
+  // Renderer setup
   renderer = new THREE.WebGLRenderer({ 
     antialias: true,
     alpha: true 
   })
   renderer.setSize(container.value.clientWidth, container.value.clientHeight)
-  renderer.setPixelRatio(window.devicePixelRatio)
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   renderer.outputColorSpace = THREE.SRGBColorSpace
   container.value.appendChild(renderer.domElement)
   
-  // Enhanced lighting setup
+  // Enhanced lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
   scene.add(ambientLight)
   
-  const mainLight = new THREE.DirectionalLight(0xffffff, 2)
+  const mainLight = new THREE.DirectionalLight(0x9333ea, 2)
   mainLight.position.set(5, 5, 5)
   scene.add(mainLight)
   
@@ -54,7 +56,10 @@ const init = () => {
   purpleLight.position.set(-5, 3, 0)
   scene.add(purpleLight)
   
-  // Improved controls
+  // Create futuristic mesh
+  createFuturisticMesh()
+  
+  // Controls setup
   controls = new OrbitControls(camera, renderer.domElement)
   controls.enableDamping = true
   controls.dampingFactor = 0.05
@@ -64,56 +69,85 @@ const init = () => {
   controls.minPolarAngle = Math.PI / 3
   controls.maxPolarAngle = Math.PI / 1.8
   
-  // Load model - using a reliable public model
-  const loader = new GLTFLoader()
-  loader.load(
-  //'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/DamagedHelmet/glTF/DamagedHelmet.gltf',
-   'https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/2.0/Avocado/glTF/Avocado.gltf',
-    (gltf) => {
-      model = gltf.scene
-      
-      // Center and scale model
-      const box = new THREE.Box3().setFromObject(model)
-      const center = box.getCenter(new THREE.Vector3())
-      const size = box.getSize(new THREE.Vector3())
-      
-      const maxDim = Math.max(size.x, size.y, size.z)
-      const scale = 2 / maxDim
-      model.scale.setScalar(scale)
-      
-      model.position.sub(center.multiplyScalar(scale))
-      model.position.y -= 0.5
-      
-      scene.add(model)
-      isLoading.value = false
-
-      // Handle animations if present
-      if (gltf.animations && gltf.animations.length) {
-        mixer = new THREE.AnimationMixer(model)
-        const action = mixer.clipAction(gltf.animations[0])
-        action.play()
-      }
-    },
-    // Loading progress
-    (xhr) => {
-      console.log((xhr.loaded / xhr.total * 100) + '% loaded')
-    },
-    // Error handling
-    (error) => {
-      console.error('Error loading model:', error)
-      isLoading.value = false
-    }
-  )
+  isLoading.value = false
   
   window.addEventListener('resize', onResize)
   animate()
 }
 
-const animate = () => {
+const createFuturisticMesh = () => {
+  // Create a complex geometry by combining multiple shapes
+  const geometry = new THREE.IcosahedronGeometry(1, 1)
+  
+  // Add detail to the geometry
+  const positionAttribute = geometry.attributes.position
+  const vertices = []
+  
+  for (let i = 0; i < positionAttribute.count; i++) {
+    const vertex = new THREE.Vector3()
+    vertex.fromBufferAttribute(positionAttribute, i)
+    
+    // Add some noise to vertices
+    const noise = 0.2 * Math.sin(vertex.x * 5) * Math.cos(vertex.y * 5)
+    vertex.multiplyScalar(1 + noise)
+    
+    vertices.push(vertex.x, vertex.y, vertex.z)
+  }
+  
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3))
+  
+  // Create wireframe geometry
+  const wireframe = new THREE.WireframeGeometry(geometry)
+  const wireMaterial = new THREE.LineBasicMaterial({
+    color: 0x9333ea,
+    transparent: true,
+    opacity: 0.3
+  })
+  const wireframeMesh = new THREE.LineSegments(wireframe, wireMaterial)
+  scene.add(wireframeMesh)
+  
+  // Create main mesh with custom shader material
+  const material = new THREE.ShaderMaterial({
+    uniforms: {
+      time: { value: 0 },
+      color: { value: new THREE.Color(0x9333ea) }
+    },
+    vertexShader: `
+      varying vec3 vNormal;
+      varying vec3 vPosition;
+      
+      void main() {
+        vNormal = normalize(normalMatrix * normal);
+        vPosition = position;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      uniform float time;
+      uniform vec3 color;
+      varying vec3 vNormal;
+      varying vec3 vPosition;
+      
+      void main() {
+        float pulse = sin(time * 2.0) * 0.5 + 0.5;
+        float fresnel = pow(1.0 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 3.0);
+        vec3 glow = color * (fresnel * pulse);
+        gl_FragColor = vec4(glow, 0.3);
+      }
+    `,
+    transparent: true,
+    side: THREE.DoubleSide
+  })
+  
+  mesh = new THREE.Mesh(geometry, material)
+  scene.add(mesh)
+}
+
+const animate = (time) => {
   animationFrameId = requestAnimationFrame(animate)
   
-  if (mixer) {
-    mixer.update(0.016)
+  if (mesh?.material.uniforms) {
+    mesh.material.uniforms.time.value = time * 0.001
   }
   
   if (controls) {

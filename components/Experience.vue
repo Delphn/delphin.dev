@@ -11,7 +11,7 @@
       <div class="text-center mb-16 space-y-2">
         <h2 class="text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r"
             :class="isDark ? 'from-purple-400 via-pink-500 to-purple-400' : 'from-purple-600 via-pink-600 to-purple-600'">
-          Neural Timeline
+          Tech Odyssey
         </h2>
         <p class="text-lg"
            :class="isDark ? 'text-purple-300' : 'text-purple-700'">
@@ -27,7 +27,7 @@
           <div class="p-8 rounded-2xl backdrop-blur-sm border transition-all duration-300"
                :class="isDark ?
                 'bg-purple-900/10 hover:bg-purple-900/20 border-purple-500/20 hover:border-purple-500/40' :
-                'bg-white/50 hover:bg-white/80 border-purple-200 hover:border-purple-300'">
+                'bg-white/70 hover:bg-white/90 border-purple-200 hover:border-purple-300'">
 
             <!-- Tech frame -->
             <div class="absolute inset-px rounded-2xl overflow-hidden">
@@ -59,19 +59,35 @@
                 </div>
               </div>
 
+              <!-- Context -->
+              <div v-if="job.context"
+                   class="mb-8 p-6 rounded-lg leading-relaxed"
+                   :class="isDark ?
+                    'bg-purple-900/30 text-gray-200' :
+                    'bg-purple-50/80 text-gray-700'">
+                <div class="font-mono text-sm mb-3"
+                     :class="isDark ? 'text-purple-400' : 'text-purple-700'">
+                  // Project Context
+                </div>
+                <p class="whitespace-pre-line text-base max-w-3xl space-y-4">
+                  {{ job.context.split('\n').filter(line => line.trim()).join('\n\n') }}
+                </p>
+              </div>
+
               <!-- Achievement matrix -->
               <div class="space-y-4 mb-8">
                 <div v-for="(achievement, i) in job.achievements"
                      :key="i"
-                     class="flex gap-4 p-3 rounded-lg transition-colors duration-300"
+                     class="flex gap-4 p-4 rounded-lg transition-colors duration-300"
                      :class="isDark ?
-                      'bg-purple-900/20 hover:bg-purple-900/30' :
-                      'bg-purple-50/50 hover:bg-purple-50/80'">
-                  <div class="flex-shrink-0 w-6 h-6 flex items-center justify-center">
+                      'bg-purple-900/30 hover:bg-purple-900/40' :
+                      'bg-purple-50/80 hover:bg-purple-50/90'">
+                  <div class="flex-shrink-0 w-6 h-6 flex items-center justify-center mt-1">
                     <div class="w-1.5 h-1.5 rounded-full"
                          :class="isDark ? 'bg-purple-400' : 'bg-purple-600'"></div>
                   </div>
-                  <p :class="isDark ? 'text-gray-300' : 'text-gray-700'">
+                  <p class="text-base leading-relaxed"
+                     :class="isDark ? 'text-gray-200' : 'text-gray-700'">
                     {{ achievement }}
                   </p>
                 </div>
@@ -119,7 +135,8 @@ const experience = [
     title: 'Full Stack Engineer',
     company: 'Claranet',
     period: 'Feb 2023 - May 2024 (1yr 4mos)',
-    context: 'Design, develop and maintain the company\'s internal applications and products. Work closely with Product Owners to understand clients needs and requirements, ensuring design and implementation while guaranteeing a high level of quality.',
+    context: `Design, develop and maintain the company's internal applications and products.
+              Work closely with Product Owners to understand clients needs and requirements, ensuring design and implementation while guaranteeing a high level of quality.`,
     achievements: [
       'Designed and developed a new micro-service for managing and sharing secrets',
       'Created an internal communication tool featuring email list management, AI-powered WYSIWYG editor, and multi-platform integration (Slack, Teams)',

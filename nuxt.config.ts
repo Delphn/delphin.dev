@@ -5,11 +5,11 @@ export default defineNuxtConfig({
   ssr: false, // Disable SSR in WebContainer environment
   app: {
     head: {
-      title: 'John Doe - Software Engineer',
+      title: 'Delphin Rukundo - Software Engineer',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Professional portfolio of John Doe - Software Engineer' }
+        { name: 'description', content: 'Professional portfolio of Delphin Rukundo - Software Engineer' }
       ]
     }
   },
