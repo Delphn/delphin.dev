@@ -18,7 +18,10 @@ export default defineNuxtConfig({
     '@vueuse/motion/nuxt'
   ],
   nitro: {
-    preset: 'node'
+    firebase: {
+      gen: 2,
+      nodeVersion: '18'
+    }
   },
   // Add YAML support
   vite: {
