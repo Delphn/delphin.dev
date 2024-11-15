@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: false },
-  ssr: false, // Disable SSR in WebContainer environment
+  ssr: true,
   app: {
     head: {
       title: 'Delphin Rukundo - Software Engineer',
@@ -18,10 +18,7 @@ export default defineNuxtConfig({
     '@vueuse/motion/nuxt'
   ],
   nitro: {
-    firebase: {
-      gen: 2,
-      nodeVersion: '18'
-    }
+    preset: 'node'
   },
   // Add YAML support
   vite: {

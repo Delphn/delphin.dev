@@ -16,7 +16,7 @@
                 <span class="font-mono text-sm">STATUS: ONLINE</span>
               </div>
               
-              <h1 class="quantum-heading text-5xl md:text-7xl font-bold space-y-2">
+              <h1 class="quantum-heading text-5xl md:text-7xl font-bold flex flex-wrap items-center gap-x-6 gap-y-2">
                 <div class="glitch-container">
                   <span class="glitch-text" data-text="Delphin">Delphin</span>
                 </div>
@@ -78,7 +78,6 @@ const { isDark } = useTheme()
 .glitch-container {
   position: relative;
   display: inline-block;
-  margin: 0.2em 0;
 }
 
 .glitch-text {
