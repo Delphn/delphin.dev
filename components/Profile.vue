@@ -188,9 +188,8 @@ onUnmounted(() => {
 
 <style scoped>
 .profile-container {
-  position: relative;
-  width: 400px;
-  height: 400px;
+  width: min(100%, 400px);
+  aspect-ratio: 1;
   margin: 0 auto;
 }
 
@@ -246,5 +245,12 @@ onUnmounted(() => {
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+/* Mobile responsiveness fixes */
+@media (max-width: 879px) {
+  .profile-container {
+    width: min(100%, 300px);
+  }
 }
 </style>

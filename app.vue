@@ -35,17 +35,30 @@ watch(() => useState('dark').value, (isDark) => {
 /* Base styles */
 :root {
   color-scheme: light dark;
-  overflow-y: scroll;
+  overflow-x: hidden;
   background: var(--page-bg);
+  width: 100%;
 }
 
 html {
   scroll-behavior: smooth;
   background: var(--page-bg);
+  overflow-x: hidden;
+  width: 100%;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
 }
 
 body {
   background: var(--page-bg);
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .grid-background {
@@ -99,10 +112,8 @@ body {
   --primary: rgb(96, 165, 250);
   --page-bg: #020420;
 }
-
 /* Overscroll behavior */
 @supports (-webkit-touch-callout: none) {
-
   /* iOS devices */
   body {
     overscroll-behavior-y: none;
@@ -113,6 +124,42 @@ body {
 @supports (overscroll-behavior-y: contain) {
   html {
     overscroll-behavior-y: contain;
+  }
+}
+
+/* Mobile responsiveness fixes */
+@media (max-width: 879px) {
+  .container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .grid {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* Prevent horizontal scrolling */
+  html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  /* Fix iOS Safari 100vh issue */
+  .min-h-screen {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* iOS Safari viewport height fix */
+@supports (-webkit-touch-callout: none) {
+  .min-h-screen {
+    min-height: -webkit-fill-available;
   }
 }
 </style>

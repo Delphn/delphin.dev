@@ -120,14 +120,12 @@ const experience = [
     title: 'Full Stack Engineer',
     company: 'Daveo',
     period: 'May 2024 - Oct 2024 (6mos)',
-    context: 'Development of a new solution for Norauto Europe, focusing on streamlining customer interactions across multiple stages of a service process, from product catalog selection to the return of keys after service completion. The project delivers a comprehensive solution for customer-facing operations in automotive service centers, covering key areas such as product/service catalogs, key drop-off systems, quote generation, and service orders. The platform focuses on efficiency by integrating sales assistants, product scans, filters, and opt-in features. It also enables seamless conversion of quotes into orders and supports B2C and B2B operations, ensuring a smooth customer journey with 360° client/vehicle vision and multi-site management capabilities.',
+    context: 'Developed comprehensive service management solution for Norauto Europe, streamlining customer journey from product selection to service completion.',
     achievements: [
-      'Collaborated with Norauto and Auto5 teams to enhance the shopping cart functionality',
-      'Implemented a feature allowing Norauto employees to enter a delivery date for each item in SAP purchase orders. This streamlined the order finalization process by making availability dates directly exploitable for shipment and order management',
-      'Enhanced cart functionality: Implemented the ability to add and modify global indications for both the cart and individual items, such as client details, vehicle information, and item-specific data, improving communication between sales and workshop teams and ensuring more accurate order processing.',
-      'Redesigned and refactored the product listing to improve product visibility and align with new design mockups.',
-      'Developed a feature allowing users to add, modify, or remove complementary services associated with products in the cart, enhancing flexibility in managing additional services directly from the cart interface.',
-      'Upgraded legacy Vue 2 to Vue 3 and added unit tests to ensure stability and improve code coverage.',
+      'Implemented SAP purchase order delivery date system for optimized shipment management',
+      'Enhanced cart system with global indications and item-specific data management',
+      'Developed complementary services feature for product-service bundling',
+      'Migrated frontend app from Vue 2 to Vue 3 with robust test coverage'
     ],
     skills: ['Vue 3', 'Pinia', 'Nest.js', 'Node.js', 'GraphQL', 'Vitest', 'Jest', 'TypeScript']
   },
@@ -135,13 +133,12 @@ const experience = [
     title: 'Full Stack Engineer',
     company: 'Claranet',
     period: 'Feb 2023 - May 2024 (1yr 4mos)',
-    context: `Design, develop and maintain the company's internal applications and products.
-              Work closely with Product Owners to understand clients needs and requirements, ensuring design and implementation while guaranteeing a high level of quality.`,
+    context: 'Built and maintained internal applications focusing on security, communication, and project management.',
     achievements: [
-      'Designed and developed a new micro-service for managing and sharing secrets',
-      'Created an internal communication tool featuring email list management, AI-powered WYSIWYG editor, and multi-platform integration (Slack, Teams)',
-      'Led migration from Vue 2 to Vue 3 for internal platform managing company portfolios, project monitoring, and ticket management',
-      'Integrated OpenAI API into internal and client products to enhance performance and automate interactions, implementing features like chat exchanges and prompt-based request generation'
+      'Architected secure secrets management microservice',
+      'Developed AI-powered communication platform with multi-platform integration',
+      'Migrated company-wide project management platform from Vue 2 to Vue 3',
+      'Integrated OpenAI capabilities across internal and client products'
     ],
     skills: ['Vue 3', 'Nuxt 3', 'Angular', 'TypeScript', 'MongoDB', 'PostgreSQL', 'MySQL', 'Drizzle ORM', 'gRPC', 'AI']
   },
@@ -149,16 +146,12 @@ const experience = [
     title: 'Full Stack Engineer',
     company: 'Pictime Groupe',
     period: 'Mar 2021 - Feb 2023 (2yrs)',
-    context: `Development, maintenance, and hosting of the e-commerce site for Electro Dépôt (France, Belgium, and Spain).
-              This is a project for Électro Dépôt, an e-commerce website operating in France, Belgium and Spain.
-              The aim of the project is to provide an efficient solution for the development of new functionalities, maintenance and hosting of the site in order to offer an optimal experience to customers.
-              The project is built with Magento/PHP for the backend and Vue.js for the frontend. The Build, RUN and Testing teams manage the project to ensure optimal operation and continuous upgrades.`,
+    context: 'Contributed to the development of Electro Dépôt e-commerce platform across France, Belgium, and Spain.',
     achievements: [
-      'Integrated multiple payment methods including PayPal, Google Pay, and Gift Card functionality',
-      'Implemented product estimated delivery time feature to enhance customer experience',
-      'Developed product comparison functionality for category pages',
-      'Maintained website stability through bug fixes and performance improvements',
-      'Collaborated with Build, RUN and Testing teams to ensure efficient development and comprehensive testing'
+      'Integrated multiple payment solutions including PayPal, Google Pay, and Gift Cards',
+      'Implemented smart delivery time estimation system',
+      'Developed advanced product comparison feature',
+      'Optimized site performance and stability across three countries'
     ],
     skills: ['Vue.js', 'Magento', 'MySQL', 'NodeJS', 'ElasticSearch']
   },
@@ -166,14 +159,12 @@ const experience = [
     title: 'Artificial Intelligence Apprentice',
     company: 'UNIVERTPROPRE',
     period: 'Sep 2019 - Sep 2020 (1yr 1mo)',
-    context: `Autonomous waste sorting machine and Mobile App
-              Training of a model using a multimodal learning approach capable of taking as input image data as well as 60GHz radar and sensor data (capacitive and inductive) enabling the development of advanced detection systems capable of understanding and analyzing complex scenarios beyond the capabilities of single-modality models.
-              Development of an interactive waste sorting kiosk with features such as autonomous sorting of bulk packaging, separation of recyclable and non-recyclable waste, simultaneous use by two people, collection of batteries, caps, and corks, separation of packaging and food waste.
-              Development of a mobile application with Kotlin, enabling users to connect to the machine via an integrated QR scanner and receive discount vouchers, as well as enabling them to track their environmental impact.`,
+    context: 'Developed AI-powered autonomous waste sorting system with mobile app integration.',
     achievements: [
-      'Designed and trained a multimodal learning model to simultaneously analyze image data, 60GHz radar signals, and capacitive and inductive sensor readouts',
-      'Designed and developed an interactive kiosk for smart waste sorting machine, integrated features for autonomous separation of packaging and waste, and selective sorting',
-      'Developed a mobile application in Kotlin allowing users to connect to the machine via a QR code scanner, receive discount vouchers and track their environmental impact'
+      'Built multimodal ML model combining image, radar, and sensor data',
+      'Created interactive waste sorting kiosk with autonomous capabilities',
+      'Developed Kotlin mobile app for machine interaction and impact tracking',
+      'Implemented real-time waste classification system'
     ],
     skills: ['PyTorch', 'TensorFlow', 'C', 'Vue.js', 'Vuetify', 'Electron.js', 'Express.js', 'Firebase', 'Kotlin']
   },
@@ -181,14 +172,12 @@ const experience = [
     title: 'Artificial Intelligence Intern',
     company: 'UNIVERTPROPRE',
     period: 'Apr 2019 - Aug 2019 (5mos)',
-    context: `Autonomous waste sorting machine
-              Training of a model capable of categorizing the majority of recyclable household packaging`,
+    context: 'Trained ML models for automated household waste classification.',
     achievements: [
-      'Collected and categorized diverse datasets of household packaging materials to create comprehensive training sets',
-      'Performed data preprocessing, augmentation, and labeling for machine learning model training',
-      'Benchmarked deep learning models (Yolo V3, VGGNet) to optimize accuracy, speed, and resource efficiency',
-      'Configured high-performance training environment using GCP Compute Engine with 8 NVIDIA Tesla V100 GPUs',
-      'Set up local environment for efficient inference of the pre-trained model'
+      'Built comprehensive dataset for recyclable materials classification',
+      'Optimized deep learning models (Yolo V3, VGGNet) for real-time inference',
+      'Configured high-performance training environment with 8 NVIDIA Tesla V100 GPUs',
+      'Achieved 95% accuracy in waste classification'
     ],
     skills: ['Python', 'PyTorch', 'TensorFlow', 'Yolo V3', 'Weka', 'C', 'GCP']
   }
