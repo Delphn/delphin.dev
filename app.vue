@@ -4,6 +4,33 @@
   </NuxtLayout>
 </template>
 
+<script setup>
+import { onMounted } from 'vue'
+
+// Initialize analytics tracking
+const { trackEvent } = useAnalytics()
+
+onMounted(() => {
+  // Track page view on initial load
+  trackEvent('page_view', {
+    page_title: document.title,
+    page_location: window.location.href,
+    page_path: window.location.pathname
+  })
+})
+
+// Set initial theme class
+onMounted(() => {
+  const isDark = useState('dark').value
+  document.documentElement.classList.toggle('dark', isDark)
+})
+
+// Watch for theme changes
+watch(() => useState('dark').value, (isDark) => {
+  document.documentElement.classList.toggle('dark', isDark)
+})
+</script>
+
 <style>
 /* Base styles */
 :root {
@@ -21,20 +48,11 @@ body {
   background: var(--page-bg);
 }
 
-/* Theme variables */
-:root {
-  --page-bg: #fff;
-}
-
-:root.dark {
-  --page-bg: #020420;
-}
-
 .grid-background {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(147, 51, 234, 0.03) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(147, 51, 234, 0.05) 1px, transparent 1px);
   background-size: 50px 50px;
@@ -43,12 +61,10 @@ body {
 .grid-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(147, 51, 234, 0.05) 0%,
-    rgba(147, 51, 234, 0.03) 50%,
-    transparent 100%
-  );
+  background: radial-gradient(circle at 50% 50%,
+      rgba(147, 51, 234, 0.05) 0%,
+      rgba(147, 51, 234, 0.03) 50%,
+      transparent 100%);
 }
 
 .grid-overlay::before {
@@ -59,8 +75,15 @@ body {
 }
 
 @keyframes flashingDots {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 0.15; }
+
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.15;
+  }
 }
 
 .bg-deep-blue {
@@ -69,14 +92,17 @@ body {
 
 :root {
   --primary: rgb(59, 130, 246);
+  --page-bg: #fff;
 }
 
 .dark {
   --primary: rgb(96, 165, 250);
+  --page-bg: #020420;
 }
 
 /* Overscroll behavior */
 @supports (-webkit-touch-callout: none) {
+
   /* iOS devices */
   body {
     overscroll-behavior-y: none;
@@ -90,16 +116,3 @@ body {
   }
 }
 </style>
-
-<script setup>
-// Set initial theme class
-onMounted(() => {
-  const isDark = useState('dark').value
-  document.documentElement.classList.toggle('dark', isDark)
-})
-
-// Watch for theme changes
-watch(() => useState('dark').value, (isDark) => {
-  document.documentElement.classList.toggle('dark', isDark)
-})
-</script>

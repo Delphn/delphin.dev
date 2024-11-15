@@ -22,6 +22,9 @@ export default defineNuxtConfig({
   },
   // Add YAML support
   vite: {
-    assetsInclude: ['**/*.yaml']
+    assetsInclude: ['**/*.yaml'],
+    optimizeDeps: {
+      include: ['firebase/app', 'firebase/analytics']
+    }
   }
 })
